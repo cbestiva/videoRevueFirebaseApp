@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name='viewport' content='width=device-width '>
+  <title>Video Revue Firebase App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+  <body>
+    <div id="app">
+      <div class="header">
+        <h1>Video Revue Firebasae App</h1>
+      </div>
+      <!-- <div>Course:
+        <select id="course">
+          <option value="Java Serverlet">Java Serverlet</option>
+          <option value="Javascript Roadtrip">Javascript Roadtrip</option>
+        </select>
+        <button>Go</button>
+      </div> -->
+      <section class="row">
+        <div class="col1">
+          <div class="profile">
+            <div class="create-post">
+              <h4>{{ courseName }} Review</h4>
+              <form>
+                <div class="row">
+                  <select id="module">
+                    <option value="Module 1">Module 1</option>
+                    <option value="Module 2">Module 2</option>
+                    <option value="Module 3">Module 3</option>
+                    <option value="Module 4">Module 4</option>
+                  </select>
+                  <select id="clip">
+                    <option value="Clip 1">Clip 1</option>
+                    <option value="Clip 2">Clip 2</option>
+                    <option value="Clip 3">Clip 3</option>
+                  </select>
+                  Timestamp: <input id="timestamp" type="text" name="timestamp">
+                </div>
+                <div class="row">
+                   Assignee: <input id="assignee" type="text" name="assignee">
+                </div>
+                <div class="row">
+                   File: <input id="file" type="text" name="file">
+                </div>
+                <div class="row">
+                  <textarea id="comment" placeholder="Add commnet..." rows="8" cols="50"></textarea>
+                </div>
+                <div class="row">
+                  <button id="addReview" class="button">Add Review</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col2">
+          <h4>{{ courseName }} Reviews</h4>
+          <div v-if="reviews.length">
+            <div v-for="review in reviews" class="review">
+              <div><button id="deleteReviewButton" class="reviewButton deleteButton">Delete</button></div>
+              <p>{{ review.module}} | {{ review.clip }} | Timestamp: {{ review.timestamp }} | File: <a href="{{review.file}}">{{ review.file}}</a> </p>
+              <div>
+                Assigned to: {{ review.assignee }} | 
+                Status: 
+                <select>
+                  <option value="Not started">Not started</option>
+                  <option value="In progress">In progress</option>
+                  <option value="Done">Done</option>
+                </select>
+              </div>
+              <p>{{ review.comment | trimLength }}</p>
+              <!-- <button id="notesButton" class="reviewButton">Notes</button> -->
+            </div>
+          </div>
+          <div v-else>
+            <p class="no-results">There are currently no reviews</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/vue'></script>
+    <script src='main.js'></script>
+  </body>
+</html>
