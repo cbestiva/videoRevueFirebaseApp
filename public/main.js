@@ -1,27 +1,40 @@
 var app = new Vue({
   el: '#app',
   data: {
+    assignee: "",
+    file: "",
+    module: "",
+    clip: "",
+    comment: "",
     courses: ['Java Web App and Servlet', 'Javascript Roadtrip'],
     courseName: 'Java Web App and Servlet',
     userName: 'Sarah Holderness',
     userTitle: 'Author',
-    reviews: [
-      {
-        module: 'Module 1',
-        clip: 'Clip 1',
-        timestamp: '0:00',
-        assignee: 'Sarah',
-        file: 'https://www.dropbox.com/s/6y9yicrvg6gllai/Level1-1_1AuthorSlide.m4v?dl=0',
-        comment: 'Slide needs to be updated with author info.'
-      },
-      {
-        module: 'Module 1',
-        clip: 'Clip 1',
-        timestamp: '0:46',
-        assignee: 'Sarah',
-        file: null,
-        comment: 'Should there be audio here? I can try to record and send it to you if you don\'t have it.'
+    reviews: [],
+    courseId: 'Java Web App And Servlet'
+  },
+  mounted() {
+    db.collection('courses').doc(this.courseId).collection('reviews').onSnapshot((querySnapshot) => {
+      console.log("querySnapshot.docs ", querySnapshot.docs)
+      if (querySnapshot !== null) {
+        this.reviews = querySnapshot.docs.map((doc) => doc.data());
+      } else {
+        console.log("No such document!");
       }
-    ]
+    })
+  },
+  methods: {
+    processForm: function (data) {
+      console.log("this.comment ", this.comment)
+      const formData = {
+        courseId: this.courseId,
+        module: this.module,
+        clip: this.clip,
+        file: this.file,
+        assignee: this.assignee,
+        comment: this.comment,
+      }
+      addReview(formData)
+    }
   }
 })
